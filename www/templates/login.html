@@ -1,0 +1,36 @@
+
+
+
+<ion-view title="Sign In">
+  <ion-content class="main-login-page content-bg overlay-content" scroll="false" >
+	  <div class="spacer" style=" height:1%;"></div>
+	  <h3 class="hars">Sign In</h3>
+	  <!--<img class="title-image" src="img/logo_1915876_web.jpg" />-->
+  			<div class="list">
+			  <label class="item item-input username">
+			    <input type="text"   placeholder="Email" ng-model="user.email">
+			  </label>
+
+			  <label class="item item-input lock">
+			    <input type="password"  placeholder="Password" ng-model="user.password">
+			  </label>
+			</div>
+		
+			<button class="button button-full button-blue icon-left ion-log-in"  ng-click="validateUser()">
+				SIGN IN
+			</button>
+<i class="hars">OR</i>
+
+
+			<button class="button button-full button-twitter hide-on-keyboard-open" ng-click="authenticate('twitter')">
+				SIGN IN WITH TWITTER
+			</button>
+
+			<button class="button button-full button-facebook   icon-left ion-social-facebook hide-on-keyboard-open" ng-click="authenticate('instagram')">
+				SIGN IN WITH FACEBOOK
+			</button>
+      
+<div class="spacer" style=" height:3%;"></div>
+   <button ng-click="createUser()" class="button button-clear button-light  icon-left ion-android-person-add hide-on-keyboard-open">Or create an account</button>
+  </ion-content>
+</ion-view>
