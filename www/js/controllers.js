@@ -22,14 +22,6 @@ angular.module('app.controllers', [])
 
 })
    
-.controller('cabsCtrl', function($scope) {
-	$scope.gPlace;
-
-})
-   
-.controller('navigationCtrl', function($scope) {
-
-})
 .controller('meetingCtrl', function($scope) {
 
 })
