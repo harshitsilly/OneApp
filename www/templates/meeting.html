@@ -1,37 +1,17 @@
-
-<ion-view title="Home">
-    <ion-nav-bar class="bar-dark">
-            
-        </ion-nav-bar>
-    <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <ion-list></ion-list>
-        <div class="button-bar"></div>
-        <ion-list>
-            <ion-item class="item-thumbnail-left" ui-sref="page.detail">
-                <img>
-                <h2>meeting 1</h2>
-                <p>Sources</p>
-            </ion-item>
-            <ion-item class="item-thumbnail-left" ui-sref="page.detail">
-                <img>
-                <h2>meetin 2</h2>
-                <p>anythinfdsssssss</p>
-            </ion-item>
-            <ion-item class="item-thumbnail-left" ui-sref="page.detail">
-                <img>
-                <h2>meetin 1</h2>
-                <p>geolocation</p>
-            </ion-item>
-            <ion-item class="item-thumbnail-left">
-                <img>
-                <h2>meetin 4</h2>
-                <p>upef</p>
-            </ion-item>
-            <ion-item class="item-thumbnail-left">
-                <img>
-                <h2>Plan Your Day</h2>
-                <p>trip , calendar events</p>
-            </ion-item>
-        </ion-list>
-    </ion-content>
+<ion-view title="Today's Meetings">
+  <ion-nav-bar class="bar-dark">
+  </ion-nav-bar>
+  <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="item in items" item="item"  ng-click="detailNav()">
+        <h2>{{ item.description }}</h2>
+        <h3>{{ item.organizerName.first }} {{ item.organizerName.last }}</h3>
+        <p>{{ item.status }}, {{ item.isRepeating }}</p>
+        <p>01:00 PM</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer-bar class="bar-assertive">
+    <button class="button button-assertive" ng-click="createMeeting()">CREATE MEETING</button>
+  </ion-footer-bar>
 </ion-view>
