@@ -15,5 +15,7 @@ Steps to follow
 5. After that type "ionic serve" to run the app in localhost
 
 Mongo DB Url
-mongodb://<himanshumeena>:<Him1234>@ds127958.mlab.com:27958/wth
+mongodb://himanshumeena:Him1234@ds127958.mlab.com:27958/wth
+username : himanshumeena
+pasword : Him1234
 
