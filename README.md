@@ -13,5 +13,7 @@ Steps to follow
    it will install all dependencies
 
 5. After that type "ionic serve" to run the app in localhost
-    
+
+Mongo DB Url
+mongodb://<himanshumeena>:<Him1234>@ds127958.mlab.com:27958/wth
 
