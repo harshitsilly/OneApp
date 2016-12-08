@@ -30,7 +30,7 @@ angular.module('app.controllers', [])
       });
      
   }
-  $scope.itemArray = [
+  $scope.memberList = [
         {id: 1, name: 'first'},
         {id: 2, name: 'second'},
         {id: 3, name: 'third'},
@@ -38,7 +38,7 @@ angular.module('app.controllers', [])
         {id: 5, name: 'fifth'},
     ];
 
-    $scope.selected = { value: $scope.itemArray[0] };
+    $scope.selected = { value: $scope.memberList[0] };
   $scope.edit = $rootScope.edit ;
    $scope.building = ['', 'blr1', 'blr2', 'blr3'];
    $scope.users = ['', 'usr1', 'usr2', 'usr3'];
