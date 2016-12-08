@@ -84,6 +84,12 @@ angular.module('app.controllers', [])
   $scope.createMeeting = function () {
     $rootScope.meetingDetail[0].editable = false;
     $state.go("page.detail");
+
+    //make call for buildings
+
+     $rootScope.building = ['', 'blr1', 'blr2', 'blr3'];
+     $rootScope.users = ['', 'usr1', 'usr2', 'usr3'];
+
   };
 
   $scope.detailNav = function () {
@@ -99,9 +105,10 @@ angular.module('app.controllers', [])
 .controller('detailCtrl', function ($scope, $rootScope, $state) {
 
    $scope.building = ['', 'blr1', 'blr2', 'blr3'];
+   $scope.users = ['', 'usr1', 'usr2', 'usr3'];
    $scope.floor = ['', 'f1', 'f2', 'f3'];
    $scope.room = ['', 'r1', 'r2', 'r3'];
-   $scope.my = { selectedBuilding: '',  selectedFloor: '', selectedRoom: '', subject: '', description: '', startTimeRange: '', endTimeRange: '', dateForMeeting: '', duration: ''};
+   $scope.my = { users:'', selectedBuilding: '',  selectedFloor: '', selectedRoom: '', subject: '', description: '', startTimeRange: '', endTimeRange: '', dateForMeeting: '', duration: ''};
   
    $scope.createMyMeeting = function() {
       var sSelectedBuilding = $scope.my.selectedBuilding;

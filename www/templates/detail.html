@@ -12,6 +12,18 @@
   <ion-content overflow-scroll="true" padding="true" class="has-header">
     <div class="list padding">
      
+      <div class="list">
+       <label class="item item-input item-select">
+          <div class="input-label">
+            Building
+          </div>
+          <select name="multiSelect" ng-model="my.users" ng-options="opt as opt for opt in users">
+          
+          
+          </select>
+        </label>
+     </div>
+ 
      <div class="list">
        <label class="item item-input item-select">
           <div class="input-label">
@@ -23,27 +35,12 @@
           </select>
         </label>
      </div>
-
-     <div class="list">
-
-  <label class="item item-input item-select">
-    <div class="input-label">
-      Lightsaber
-    </div>
-    <select>
-      <option>Blue</option>
-      <option selected>Green</option>
-      <option>Red</option>
-    </select>
-  </label>
-
-</div>
-      
+ 
       <label class="item item-input-inset">
-        <input type="text" placeholder="Floor" ng-model="my.selectedFloor">
+        <input type="text" placeholder="Desired Floor" ng-model="my.selectedFloor">
       </label>
       <label class="item item-input-inset">
-        <input type="text" placeholder="Room" ng-model="my.selectedRoom">
+        <input type="text" placeholder="Capacity" ng-model="my.selectedRoom">
       </label>
     </div>
     <div class="list padding">
