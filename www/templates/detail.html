@@ -11,36 +11,61 @@
   </ion-nav-bar>
   <ion-content overflow-scroll="true" padding="true" class="has-header">
     <div class="list padding">
+     
+     <div class="list">
+       <label class="item item-input item-select">
+          <div class="input-label">
+            Building
+          </div>
+          <select name="singleSelect" ng-model="my.selectedBuilding" ng-options="opt as opt for opt in building">
+          
+          
+          </select>
+        </label>
+     </div>
+
+     <div class="list">
+
+  <label class="item item-input item-select">
+    <div class="input-label">
+      Lightsaber
+    </div>
+    <select>
+      <option>Blue</option>
+      <option selected>Green</option>
+      <option>Red</option>
+    </select>
+  </label>
+
+</div>
+      
       <label class="item item-input-inset">
-        <input type="text" placeholder="Building">
+        <input type="text" placeholder="Floor" ng-model="my.selectedFloor">
       </label>
       <label class="item item-input-inset">
-        <input type="text" placeholder="Floor" >
-      </label>
-      <label class="item item-input-inset">
-        <input type="text" placeholder="Room" >
+        <input type="text" placeholder="Room" ng-model="my.selectedRoom">
       </label>
     </div>
     <div class="list padding">
       <label class="item item-input-inset">
-        <input type="text" placeholder="Subject">
+        <input type="text" placeholder="Subject" ng-model="my.subject" ng-value="" name="subject">
       </label>
       <label class="item item-input-inset">
         <textarea id = "myTextArea"
                   rows = "3"
                   cols = "80"
-                  placeholder="Description"></textarea>
+                  placeholder="Description" ng-model="my.description" ng-value="" name="description"></textarea>
       </label>
     </div>
     <div class="list padding row">
       <label class="item item-input col">
-        <input type="time" name="input" ng-model="example.value"
+        <input type="time" name="input" ng-model= "my.startTimeRange"
           placeholder="HH:mm:ss" required />
       </label>
       <label class="item item-input col">To
       </label>
       <label class="item item-input col">
-        <input type="time" name="input" ng-model="example.value"
+        <input type="time" name="input" ng-model="my.endTimeRange"
           placeholder="HH:mm:ss" required />
       </label>
     </div>
@@ -49,13 +74,13 @@
         <input type="date">
       </label>
       <label class="item item-input col col-offset-10">
-        <input type="number" placeholder="Duration in hours">
+        <input type="number" placeholder="Duration in hours" ng-model="my.duration">
       </label>
     </div>
     
     <!--Submit Button-->
     <div class="padding">
-      <button class="button button-block button-positive">Create</div>
+      <button class="button button-block button-positive" ng-click="createMyMeeting()">Create</div>
     </div>  
   </ion-content>
 </ion-view>

@@ -95,3 +95,33 @@ angular.module('app.controllers', [])
     $state.go("page.detail");
   };
 })
+
+.controller('detailCtrl', function ($scope, $rootScope, $state) {
+
+   $scope.building = ['', 'blr1', 'blr2', 'blr3'];
+   $scope.floor = ['', 'f1', 'f2', 'f3'];
+   $scope.room = ['', 'r1', 'r2', 'r3'];
+   $scope.my = { selectedBuilding: '',  selectedFloor: '', selectedRoom: '', subject: '', description: '', startTimeRange: '', endTimeRange: '', dateForMeeting: '', duration: ''};
+  
+   $scope.createMyMeeting = function() {
+      var sSelectedBuilding = $scope.my.selectedBuilding;
+      var sSelectedFloor = $scope.my.selectedFloor;
+      var sSelectedRoom = $scope.my.selectedRoom;
+      var sSubject = $scope.my.subject;
+      var sDescription = $scope.my.description;
+      var tstartTimeRange = $scope.my.startTimeRange;
+      var tendTimeRange = $scope.my.endTimeRange;
+      var dDateForMeeting = $scope.my.dateForMeeting;
+      var iduration = $scope.my.duration;
+
+      var oPayload = {
+
+      };
+
+      // make call
+
+     
+   };
+
+ 
+})
