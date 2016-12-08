@@ -3,11 +3,19 @@
   </ion-nav-bar>
   <ion-content overflow-scroll="true" padding="true" class="has-header">
     <ion-list>
-      <ion-item ng-repeat="item in items" item="item"  ng-click="detailNav()">
-        <h2>{{ item.description }}</h2>
-        <h3>{{ item.organizerName.first }} {{ item.organizerName.last }}</h3>
-        <p>{{ item.status }}, {{ item.isRepeating }}</p>
-        <p>01:00 PM</p>
+      <ion-item ng-repeat="item in items" item="item" ng-click="detailNav()">
+        <div class="meetingDetail">
+          <h2>{{ item.description }}</h2>
+          <h3>{{ item.organizerName.first }} {{ item.organizerName.last }}</h3>
+          <p>{{ item.status }}, {{ item.isRepeating }}</p>
+          <p>01:00 PM</p>
+        </div>
+        <div>
+          <button ng-show="chkDecision()" class="button button-balanced" ng-click="acceptMeeting()">ACCEPT
+          </button>
+          <button ng-show="chkDecision()" class="button button-assertive" ng-click="declineMeeting()">DECLINE
+          </button>
+        </div>
       </ion-item>
     </ion-list>
   </ion-content>

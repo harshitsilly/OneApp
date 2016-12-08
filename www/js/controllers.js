@@ -107,7 +107,14 @@ angular.module('app.controllers', [])
     "status": "ACCEPTED",
     "isRepeating": true
   }];
-
+  $scope.decision = true;
+  $scope.chkDecision = function(){
+    if(this.item.status === "TO BE DECIDED"){
+      return true;
+    }else{
+      return false;
+    }
+  }
   $scope.createMeeting = function () {
     $rootScope.edit = false;
     $rootScope.meetingDetail = [{
