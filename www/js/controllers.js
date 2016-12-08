@@ -18,8 +18,18 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('detailCtrl', function ($scope, $rootScope) {
+.controller('detailCtrl', function ($scope, $rootScope, $ionicActionSheet) {
   $scope.detailTitle = $rootScope.meetingDetail[0].description;
+  $scope.deleteMeeting = function () {
+      var hideSheet = $ionicActionSheet.show({
+        destructiveText: 'Confirm',
+        cancelText: 'Cancel',
+        destructiveButtonClicked : function () {
+          // add delete code..
+        }
+      });
+  }
+
 })
 
 .controller('meetingCtrl', function ($scope, $rootScope, $state) {

@@ -1,7 +1,61 @@
-<ion-view title = "{{ detailTitle }}" >
+<ion-view title="{{ detailTitle }}">
   <ion-nav-bar class="bar-dark">
     <ion-nav-back-button>
     </ion-nav-back-button>
+    <ion-nav-buttons side="secondary">
+      <button class="button button-assertive" ng-click="deleteMeeting()">DELETE
+      </button>
+      <button class="button button-calm" ng-click="editMeeting()">EDIT
+      </button>
+    </ion-nav-buttons>
   </ion-nav-bar>
-  <ion-content overflow-scroll="true" padding="true" class="has-header"></ion-content>
+  <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <div class="list padding">
+      <label class="item item-input-inset">
+        <input type="text" placeholder="Building">
+      </label>
+      <label class="item item-input-inset">
+        <input type="text" placeholder="Floor" >
+      </label>
+      <label class="item item-input-inset">
+        <input type="text" placeholder="Room" >
+      </label>
+    </div>
+    <div class="list padding">
+      <label class="item item-input-inset">
+        <input type="text" placeholder="Subject">
+      </label>
+      <label class="item item-input-inset">
+        <textarea id = "myTextArea"
+                  rows = "3"
+                  cols = "80"
+                  placeholder="Description"></textarea>
+      </label>
+    </div>
+    <div class="list padding row">
+      <label class="item item-input col">
+        <input type="time" name="input" ng-model="example.value"
+          placeholder="HH:mm:ss" required />
+      </label>
+      <label class="item item-input col">To
+      </label>
+      <label class="item item-input col">
+        <input type="time" name="input" ng-model="example.value"
+          placeholder="HH:mm:ss" required />
+      </label>
+    </div>
+    <div class="list padding row">
+      <label class="item item-input col">
+        <input type="date">
+      </label>
+      <label class="item item-input col col-offset-10">
+        <input type="number" placeholder="Duration in hours">
+      </label>
+    </div>
+    
+    <!--Submit Button-->
+    <div class="padding">
+      <button class="button button-block button-positive">Create</div>
+    </div>  
+  </ion-content>
 </ion-view>
