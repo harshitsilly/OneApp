@@ -3,9 +3,9 @@
     <ion-nav-back-button>
     </ion-nav-back-button>
     <ion-nav-buttons side="secondary">
-      <button class="button button-assertive" ng-click="deleteMeeting()">DELETE
+      <button ng-show="edit" class="button button-assertive" ng-click="deleteMeeting()">DELETE
       </button>
-      <button class="button button-calm" ng-click="editMeeting()">EDIT
+      <button ng-show="edit" class="button button-balanced" ng-click="editMeeting()">CONFIRM
       </button>
     </ion-nav-buttons>
   </ion-nav-bar>
@@ -76,7 +76,8 @@
     </div>
     
     <!--Submit Button-->
-    <div class="padding">
+
+    <div class="padding" ng-show="!edit" >
       <button class="button button-block button-positive" ng-click="createMyMeeting()">Create</div>
     </div>  
   </ion-content>
