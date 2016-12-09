@@ -18,7 +18,15 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('detailCtrl', function ($scope, $rootScope, $ionicActionSheet) {
+.controller('detailCtrl', function ($scope, $rootScope, $ionicActionSheet, $http) {
+  $scope.buildings = [{
+    "id": 1,
+    "name": "SSZ"
+  },
+  {
+    "id": 2,
+    "name": "Whitefield"
+  }];
   $scope.detailTitle = $rootScope.meetingDetail[0].description;
   $scope.deleteMeeting = function () {
       var hideSheet = $ionicActionSheet.show({
@@ -30,41 +38,31 @@ angular.module('app.controllers', [])
       });
      
   }
-  $scope.memberList = [
-        {id: 1, name: 'first'},
-        {id: 2, name: 'second'},
-        {id: 3, name: 'third'},
-        {id: 4, name: 'fourth'},
-        {id: 5, name: 'fifth'},
-    ];
+  $http({
+    method: 'GET',
+    url: $rootScope.baseURL + '/api/member'
+  }).then(function successCallback(response) {
+      $scope.memberList = response.data;
+    }, function errorCallback(response) {
+      console.log("ERROR");
+    });
 
-    $scope.selected = { value: $scope.memberList[0] };
-  $scope.edit = $rootScope.edit ;
-   $scope.building = ['', 'blr1', 'blr2', 'blr3'];
-   $scope.users = ['', 'usr1', 'usr2', 'usr3'];
-   $scope.floor = ['', 'f1', 'f2', 'f3'];
-   $scope.room = ['', 'r1', 'r2', 'r3'];
-   $scope.my = { users:'', selectedBuilding: '',  selectedFloor: '', selectedRoom: '', subject: '', description: '', startTimeRange: '', endTimeRange: '', dateForMeeting: '', duration: ''};
+  $scope.selected = { value: $scope.memberList };
   
    $scope.createMyMeeting = function() {
-      var sSelectedBuilding = $scope.my.selectedBuilding;
-      var sSelectedFloor = $scope.my.selectedFloor;
-      var sSelectedRoom = $scope.my.selectedRoom;
-      var sSubject = $scope.my.subject;
-      var sDescription = $scope.my.description;
-      var tstartTimeRange = $scope.my.startTimeRange;
-      var tendTimeRange = $scope.my.endTimeRange;
-      var dDateForMeeting = $scope.my.dateForMeeting;
-      var iduration = $scope.my.duration;
-
-      var oPayload = {
-
-      };
-
-      // make call
-
-     
+     console.log($scope.selected.value+ $scope.building.name + $scope.building_room );
    };
+
+   $scope.onBuildingSelect = function(buildings){
+     $http({
+        method: 'GET',
+        url: $rootScope.baseURL + '/api/room?Building=' + buildings
+      }).then(function successCallback(response) {
+          $scope.rooms = response.data;
+        }, function errorCallback(response) {
+          console.log("ERROR");
+        });
+      };
 
 })
 
@@ -124,6 +122,7 @@ angular.module('app.controllers', [])
       return false;
     }
   }
+  
   $scope.createMeeting = function () {
     $rootScope.edit = false;
     $rootScope.meetingDetail = [{
@@ -132,11 +131,6 @@ angular.module('app.controllers', [])
       editable: false
     }];
     $state.go("page.detail");
-
-    //make call for buildings
-
-     $rootScope.building = ['', 'blr1', 'blr2', 'blr3'];
-     $rootScope.users = ['', 'usr1', 'usr2', 'usr3'];
 
   };
 
