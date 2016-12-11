@@ -1,25 +1,40 @@
 <ion-view title="Today's Meetings">
   <ion-nav-bar class="bar-dark">
   </ion-nav-bar>
-  <ion-content overflow-scroll="true" padding="true" class="has-header">
+  <ion-content overflow-scroll="true" class="has-header">
     <ion-list>
       <ion-item ng-repeat="item in items" item="item" ng-click="detailNav()">
-        <div class="meetingDetail">
+        <div class="row row-center">
+        <div class="meetingDetail col col-80">
           <h2>{{ item.description }}</h2>
           <h3>{{ item.organizerName.first }} {{ item.organizerName.last }}</h3>
           <p>{{ item.status }}, {{ item.isRepeating }}</p>
           <p>01:00 PM</p>
         </div>
-        <div>
-          <button ng-show="chkDecision()" class="button button-balanced" ng-click="acceptMeeting()">ACCEPT
+        <div class="col">
+          <button ng-show="chkDecision()" class="col col-top icon ion-checkmark button button-positive button-clear" ng-click="acceptMeeting()">
           </button>
-          <button ng-show="chkDecision()" class="button button-assertive" ng-click="declineMeeting()">DECLINE
+          <button ng-show="chkDecision()" class="col col-bottom icon ion-close button button-positive button-clear" ng-click="declineMeeting()"> 
           </button>
+
+           <button ng-show="{{ item.status == 'ACCEPTED' ? true : false}}" class="col col-center icon ion-ios-circle-filled button button-balanced button-clear"> 
+          </button>
+          <button ng-show="{{ item.status == 'DECLINED' ? true : false}}" class="col col-center icon ion-ios-circle-filled button button-assertive button-clear"> 
+          </button>
+          <button ng-show="{{ item.status == 'DONT-KNOW' ? true : false}}" class="col col-center icon ion-ios-circle-filled button button-energized button-clear"> 
+          </button>
+        
+          <button ng-show="{{ item.status == 'CANCELLED' ? true : false}}" class="col col-center icon ion-ios-circle-filled button button-dark button-clear"> 
+          </button>
+           <button ng-show="{{ item.status == 'AWAY' ? true : false}}" class="col col-center button button-clear">15 mins away
+          </button>
+
+        </div>
         </div>
       </ion-item>
     </ion-list>
   </ion-content>
-  <ion-footer-bar class="bar-assertive">
-    <button class="button button-assertive" ng-click="createMeeting()">CREATE MEETING</button>
+  <ion-footer-bar class="bar bar-footer bar-dark">
+    <button class="col col-center button button-full button-dark" ng-click="createMeeting()">CREATE MEETING</button>
   </ion-footer-bar>
 </ion-view>
