@@ -26,6 +26,7 @@ angular.module('app.controllers', [])
     "id": 2,
     "name": "Whitefield"
   }];
+  $scope.memberList = $rootScope.memberList
   $scope.detailTitle = $rootScope.meetingDetail[0].description;
   $scope.createMeeting = {
     subject: '',
@@ -38,6 +39,9 @@ angular.module('app.controllers', [])
   $scope.selected = {
     value: ''
   };
+
+   
+
   $scope.deleteMeeting = function () {
     var hideSheet = $ionicActionSheet.show({
       destructiveText: 'Confirm',
@@ -48,20 +52,10 @@ angular.module('app.controllers', [])
     });
 
   }
-  $http({
-    method: 'GET',
-    url: $rootScope.baseURL + '/api/member'
-  }).then(function successCallback(response) {
-    $scope.memberList = response.data;
-
-  }, function errorCallback(response) {
-    console.log("ERROR");
-  });
-
-
+  
 
   $scope.createMyMeeting = function () {  
-
+//  $rootScope.show();
      var sRoom = $scope.rooms.selectedfloor;
       var sBuilding = $scope.buildings.selectedbuilding;
       var sSub = $scope.createMeeting.subject;
@@ -73,7 +67,7 @@ angular.module('app.controllers', [])
 
     var tStartTime = $scope.createMeeting.startTimeRange;
     var tEndTime = $scope.createMeeting.endTimeRange;
-    var iCanCreate = 0;
+    var iCanCreate = 1;
     var meetDate = meetingOn.toLocaleString().split(',');
     tStartTime = tStartTime.toLocaleString().split(',');
     tEndTime = tEndTime.toLocaleString().split(',');
@@ -89,18 +83,24 @@ angular.module('app.controllers', [])
     }).then(function successCallback(response) {
       console.log(response);
       if(response.data > 0){
-        iCanCreate = 1;
+        iCanCreate = 0;
       }
 
     }, function errorCallback(response) {
       console.log("ERROR");
+     
     });
     
 
     if(iCanCreate){
+     
       var aMembers = [];
+      var aMemberHash = {};
       for (i = 0; i < $scope.selected.value.length; i++) {
-        aMembers.push($scope.selected.value[i].id);
+        if(!aMemberHash[$scope.selected.value[i].id]){
+          aMembers.push($scope.selected.value[i].id);
+          aMemberHash[$scope.selected.value[i].id] = 1;
+        }
       }
      
     
@@ -123,9 +123,11 @@ angular.module('app.controllers', [])
         data: oPayload
       }).then(function successCallback(response) {
         console.log("SUCCESS");
+        // $rootScope.hide();
          $state.go('newMeeting');
         //$state.go('meetingStatus');
       }, function errorCallback(response) {
+       
         console.log("ERROR");
       });
      
@@ -157,6 +159,21 @@ angular.module('app.controllers', [])
     alert('code: ' + error.code + '\n' +
       'message: ' + error.message + '\n');
   }
+
+   $http({
+    method: 'GET',
+    url: $rootScope.baseURL + '/api/member'
+  }).then(function successCallback(response) {
+    $scope.memberList = response.data;
+    $rootScope.memberList = response.data;
+    $rootScope.memberHash = {};
+    for(var i = 0; i < response.data.length; ++i){
+        $rootScope.memberHash[response.data[i].id] = response.data[i];
+    }
+    
+  }, function errorCallback(response) {
+    console.log("ERROR");
+  });
 
   navigator.geolocation.getCurrentPosition(onSuccess, onError);
   
@@ -215,7 +232,7 @@ angular.module('app.controllers', [])
 
     $http({
       method: 'GET',
-      url: $rootScope.baseURL + '/api/meeting?id=I321530'
+      url: $rootScope.baseURL + '/api/meeting?id=I321584'
     }).then(function successCallback(response) {
           if(response && response.data){
             $scope.items = response.data.mymeetings;

@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['ionic', 'app.controllers', 'app.newMeetingRequest', 'app.meetingStatus', 'app.routes', 'app.services', 'app.directives', 'ui.select', 'ngSanitize'])
 
-.run(function($ionicPlatform, $rootScope) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading) {
   $rootScope.baseURL = "http://10.207.113.90:8080";
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -19,5 +19,6 @@ angular.module('app', ['ionic', 'app.controllers', 'app.newMeetingRequest', 'app
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+     
   });
 })
