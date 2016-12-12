@@ -3,7 +3,7 @@ var proxy = require('http-proxy-middleware');
 
 var app = express();
 
-app.use('/api/*', proxy({target: 'http://10.207.113.90:8080', changeOrigin: true}));
+// app.use('/api/*', proxy({target: 'http://10.207.113.90:8080', changeOrigin: true}));
 
 app.use(express.static('www'));
 app.set('port', process.env.PORT || 7000);
