@@ -26,7 +26,7 @@ angular.module('app.controllers', [])
     "id": 2,
     "name": "Whitefield"
   }];
-  $scope.memberList = $rootScope.memberList
+  $scope.memberList = $rootScope.memberList;
   $scope.detailTitle = $rootScope.meetingDetail[0].description;
   $scope.createMeeting = {
     subject: '',
@@ -39,7 +39,9 @@ angular.module('app.controllers', [])
   $scope.selected = {
     value: ''
   };
-
+   $scope.buildings = { name: $rootScope.buildings.selectedbuilding };
+   $scope.rooms = $rootScope.rooms; 
+   $scope.createMeeting = $rootScope.createMeeting;
    
 
   $scope.deleteMeeting = function () {
@@ -67,7 +69,7 @@ angular.module('app.controllers', [])
 
     var tStartTime = $scope.createMeeting.startTimeRange;
     var tEndTime = $scope.createMeeting.endTimeRange;
-    var iCanCreate = 1;
+    var iCanCreate = 0;
     var meetDate = meetingOn.toLocaleString().split(',');
     tStartTime = tStartTime.toLocaleString().split(',');
     tEndTime = tEndTime.toLocaleString().split(',');
@@ -82,8 +84,8 @@ angular.module('app.controllers', [])
       
     }).then(function successCallback(response) {
       console.log(response);
-      if(response.data > 0){
-        iCanCreate = 0;
+      if(response.data == 0){
+        iCanCreate = 1;
       }
 
     }, function errorCallback(response) {
@@ -96,6 +98,8 @@ angular.module('app.controllers', [])
      
       var aMembers = [];
       var aMemberHash = {};
+      aMembers.push("I321584");
+       aMemberHash["I321584"] = 1;
       for (i = 0; i < $scope.selected.value.length; i++) {
         if(!aMemberHash[$scope.selected.value[i].id]){
           aMembers.push($scope.selected.value[i].id);
@@ -268,8 +272,9 @@ angular.module('app.controllers', [])
         meetingId: "",
         editable: true
       }];
-      $scope.buildings = { selectedbuilding: this.item.building_name};
-      $scope.rooms = { selectedfloor: this.item.desired_room};
+      $rootScope.buildings = { selectedbuilding: this.item.building_name};
+      $rootScope.rooms = { selectedfloor: this.item.desired_room};
+      $rootScope.createMeeting = { subject: this.item.subject };
 
       $state.go("page.detail");
     };
