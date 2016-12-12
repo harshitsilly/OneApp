@@ -60,21 +60,20 @@ angular.module('app.controllers', [])
 
 
 
-  $scope.createMyMeeting = function () {
-    var aMembers = [];
-    for (i = 0; i < $scope.selected.value.length; i++) {
-      aMembers.push($scope.selected.value[i].id);
-    }
-    var sRoom = $scope.rooms.selectedfloor;
-    var sBuilding = $scope.buildings.selectedbuilding;
-    var sSub = $scope.createMeeting.subject;
-    var sDescription = $scope.createMeeting.description;
-    var fDuration = $scope.createMeeting.duration;
+  $scope.createMyMeeting = function () {  
+
+     var sRoom = $scope.rooms.selectedfloor;
+      var sBuilding = $scope.buildings.selectedbuilding;
+      var sSub = $scope.createMeeting.subject;
+      var sDescription = $scope.createMeeting.description;
+      var fDuration = $scope.createMeeting.duration;
+
+      var meetingOn = $scope.createMeeting.meetingDate;
+      
 
     var tStartTime = $scope.createMeeting.startTimeRange;
     var tEndTime = $scope.createMeeting.endTimeRange;
-    var meetingOn = $scope.createMeeting.meetingDate;
-    
+    var iCanCreate = 0;
     var meetDate = meetingOn.toLocaleString().split(',');
     tStartTime = tStartTime.toLocaleString().split(',');
     tEndTime = tEndTime.toLocaleString().split(',');
@@ -83,29 +82,54 @@ angular.module('app.controllers', [])
     tStartTime = new Date(tStartTime[0] + ',' + tStartTime[1]);
     tEndTime = new Date(tEndTime[0] + ',' + tEndTime[1]);
 
-    var oPayload = {
-      "building_name" : sBuilding,
-      "members" : aMembers,
-      "subject" : sSub,
-      "description" : sDescription,
-      "organizer_id" : "I321584",
-      "date" : new Date(),
-      "starttime" : tStartTime,
-      "endtime" : tEndTime,
-      "desired_floor" : sRoom.split('-')[0],
-      "desired_room" : sRoom.split('-')[1] 
-    };
-    $http({
-      method: 'POST',
-      url: $rootScope.baseURL + '/api/meeting',
-      data: oPayload
+     $http({
+      method: 'GET',
+      url: $rootScope.baseURL + '/api/x?start=' + tStartTime.toLocaleTimeString() + '&end=' + tEndTime.toLocaleTimeString() ,
+      
     }).then(function successCallback(response) {
-      console.log("SUCCESS");
+      console.log(response);
+      if(response.data > 0){
+        iCanCreate = 1;
+      }
+
     }, function errorCallback(response) {
       console.log("ERROR");
     });
-    $state.go('newMeeting');
-    //$state.go('meetingStatus');
+    
+
+    if(iCanCreate){
+      var aMembers = [];
+      for (i = 0; i < $scope.selected.value.length; i++) {
+        aMembers.push($scope.selected.value[i].id);
+      }
+     
+    
+
+      var oPayload = {
+        "building_name" : sBuilding,
+        "members" : aMembers,
+        "subject" : sSub,
+        "description" : sDescription,
+        "organizer_id" : "I321584",
+        "date" : new Date(),
+        "starttime" : tStartTime,
+        "endtime" : tEndTime,
+        "desired_floor" : sRoom.split('-')[0],
+        "desired_room" : sRoom.split('-')[1] 
+      };
+      $http({
+        method: 'POST',
+        url: $rootScope.baseURL + '/api/meeting',
+        data: oPayload
+      }).then(function successCallback(response) {
+        console.log("SUCCESS");
+         $state.go('newMeeting');
+        //$state.go('meetingStatus');
+      }, function errorCallback(response) {
+        console.log("ERROR");
+      });
+     
+    }
   };
 
   $scope.onBuildingSelect = function (buildings) {
@@ -223,10 +247,13 @@ angular.module('app.controllers', [])
     $scope.detailNav = function () {
       $rootScope.edit = true;
       $rootScope.meetingDetail = [{
-        description: this.item.description,
+        description: this.item.subject,
         meetingId: "",
         editable: true
       }];
+      $scope.buildings = { selectedbuilding: this.item.building_name};
+      $scope.rooms = { selectedfloor: this.item.desired_room};
+
       $state.go("page.detail");
     };
   })

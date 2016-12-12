@@ -30,7 +30,7 @@
         <label class="list">Room
         </label>
         <select class="item item-input-inset"  ng-model="rooms.selectedfloor">
-          <option ng-repeat="room in rooms" ng-value="room.room">{{ room.floor }}-{{ room.room }}</option>
+          <option ng-repeat="room in rooms" ng-selected = "rooms.selectedfloor ==  room.floor"    ng-value="room.room">{{ room.floor }}-{{ room.room }}</option>
         </select>
       </div>
     </div>
