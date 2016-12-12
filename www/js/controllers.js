@@ -28,22 +28,25 @@ angular.module('app.controllers', [])
   }];
   $scope.memberList = $rootScope.memberList;
   $scope.detailTitle = $rootScope.meetingDetail[0].description;
-  $scope.createMeeting = {
-    subject: '',
-    description: '',
-    startTimeRange: '',
-    endTimeRange: '',
-    duration: '',
-    meetingDate: ''
-  };
-  $scope.selected = {
-    value: ''
-  };
-  
+
+   $scope.selected = {
+      value: ''
+    };
+    
+  if(!$rootScope.IsMeetingClick){
+    $scope.createMeeting = {
+      subject: '',
+      description: '',
+      startTimeRange: '',
+      endTimeRange: '',
+      duration: '',
+      meetingDate: ''
+    };
    
-   $scope.rooms = $rootScope.rooms; 
+  } else {
+   //$scope.rooms = $rootScope.rooms; 
    $scope.createMeeting = $rootScope.createMeeting;
-   
+  }
 
   $scope.deleteMeeting = function () {
     var hideSheet = $ionicActionSheet.show({
@@ -59,7 +62,7 @@ angular.module('app.controllers', [])
 
   $scope.createMyMeeting = function () {  
 //  $rootScope.show();
-     var sRoom = $scope.rooms.selectedfloor;
+     var sRoom = $scope.createMeeting.selectedfloor;
       var sBuilding = $scope.createMeeting.selectedbuilding;
       var sSub = $scope.createMeeting.subject;
       var sDescription = $scope.createMeeting.description;
@@ -262,23 +265,41 @@ angular.module('app.controllers', [])
         meetingId: "",
         editable: false
       }];
+      $rootScope.IsMeetingClick = false;
       $state.go("page.detail");
 
     };
 
     $scope.detailNav = function () {
       $rootScope.edit = true;
+      $rootScope.IsMeetingClick = true;
       $rootScope.meetingDetail = [{
         description: this.item.subject,
         meetingId: "",
         editable: true
       }];
+      var sStTime = this.item.starttime.toString();
+      var sEnTime = this.item.endtime.toString();
+      var sStartDate = new Date(this.item.proposedDate);
+      sStartDate.setHours(sStTime.substr(0, 2));
+      sStartDate.setMinutes(sStTime.substr(2, 4));
+
+      var sEndDate = new Date(this.item.proposedDate);
+      sEndDate.setHours(sEnTime.substr(0, 2));
+      sEndDate.setMinutes(sEnTime.substr(2, 4));
+
       $rootScope.buildings = { selectedbuilding: this.item.building_name};
       $rootScope.rooms = { selectedfloor: this.item.desired_room};
       $rootScope.createMeeting = { 
         selectedbuilding : this.item.building_name,
-        subject: this.item.subject };
-
+        subject: this.item.subject,
+        selectedfloor: this.item.desired_floor + '-' + this.item.desired_room,
+       description: this.item.description,
+       startTimeRange : sStartDate,
+       endTimeRange : sEndDate,
+       meetingDate : new Date(this.item.proposedDate),
+       duration : this.item.duration
+      };
       $state.go("page.detail");
     };
   })
