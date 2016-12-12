@@ -23,32 +23,32 @@ angular.module('app', ['ionic', 'app.controllers', 'app.newMeetingRequest', 'app
   });
 
 
-  var fetchLocation = function () {
-    var onSuccess = function (position) {
-      $http({
-        method: 'PUT',
-        url: $rootScope.baseURL + '/api/location',
-        params: {
-          "id": "I321530",
-          "long": position.coords.latitude,
-          "lat": position.coords.longitude
-        }
-      }).then(function successCallback(response) {
-        console.log('Latitude: ' + position.coords.latitude + '\n' +
-          'Longitude: ' + position.coords.longitude + '\n');
-      }, function errorCallback(response) {
-        console.log("ERROR")
-      });
+  // var fetchLocation = function () {
+  //   var onSuccess = function (position) {
+  //     $http({
+  //       method: 'PUT',
+  //       url: $rootScope.baseURL + '/api/location',
+  //       params: {
+  //         "id": "I321530",
+  //         "lat": position.coords.latitude,
+  //         "long": position.coords.longitude
+  //       }
+  //     }).then(function successCallback(response) {
+  //       console.log('Latitude: ' + position.coords.latitude + '\n' +
+  //         'Longitude: ' + position.coords.longitude + '\n');
+  //     }, function errorCallback(response) {
+  //       console.log("ERROR")
+  //     });
       
-    };
+  //   };
 
-    function onError(error) {
-      console.log('code: ' + error.code + '\n' +
-        'message: ' + error.message + '\n');
-    }
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    $timeout(fetchLocation, 20000);
-  }
+  //   function onError(error) {
+  //     console.log('code: ' + error.code + '\n' +
+  //       'message: ' + error.message + '\n');
+  //   }
+  //   navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  //   $timeout(fetchLocation, 20000);
+  // }
 
-  $timeout(fetchLocation, 20000);
+  // $timeout(fetchLocation, 20000);
 })
