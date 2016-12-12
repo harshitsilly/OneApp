@@ -42,10 +42,12 @@ angular.module('app.controllers', [])
       duration: '',
       meetingDate: ''
     };
+    $scope.IsNoMeetingClick = true;
    
   } else {
    //$scope.rooms = $rootScope.rooms; 
    $scope.createMeeting = $rootScope.createMeeting;
+    $scope.IsNoMeetingClick = false;
   }
 
   $scope.deleteMeeting = function () {
@@ -284,9 +286,16 @@ angular.module('app.controllers', [])
       sStartDate.setHours(sStTime.substr(0, 2));
       sStartDate.setMinutes(sStTime.substr(2, 4));
 
+
       var sEndDate = new Date(this.item.proposedDate);
       sEndDate.setHours(sEnTime.substr(0, 2));
       sEndDate.setMinutes(sEnTime.substr(2, 4));
+
+      var sMembers = this.item.members.split(",");
+      var oMembers = [];
+      for(var i = 0; i < sMembers.length; ++i){
+        oMembers.push($rootScope.memberHash[sMembers[i]]);
+      }
 
       $rootScope.buildings = { selectedbuilding: this.item.building_name};
       $rootScope.rooms = { selectedfloor: this.item.desired_room};
@@ -298,7 +307,8 @@ angular.module('app.controllers', [])
        startTimeRange : sStartDate,
        endTimeRange : sEndDate,
        meetingDate : new Date(this.item.proposedDate),
-       duration : this.item.duration
+       duration : this.item.duration,
+       members : oMembers
       };
       $state.go("page.detail");
     };

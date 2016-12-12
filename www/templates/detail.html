@@ -11,7 +11,12 @@
   </ion-nav-bar>
   <ion-content overflow-scroll="true" padding="true" class="has-header">
     <div class="list padding ng-cloak">
-      <ui-select class="item" multiple ng-model="selected.value" sortable="true" close-on-select="false">
+      <ion-list ng-show="!IsNoMeetingClick">
+      <ion-item ng-repeat="item in createMeeting.members" item="item">
+        <p>{{ item.name }}</p>
+      </ion-item>
+      </ion-list>
+      <ui-select ng-show="IsNoMeetingClick" class="item" multiple ng-model="selected.value" sortable="true" close-on-select="false">
         <ui-select-match placeholder="Select person....">{{$item.name}}
         </ui-select-match>
         <ui-select-choices repeat="item in (memberList | filter: $select.search) track by item._id">
