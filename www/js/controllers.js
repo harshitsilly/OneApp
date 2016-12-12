@@ -18,7 +18,7 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('detailCtrl', function ($scope, $rootScope, $state, $ionicActionSheet, $http) {
+.controller('detailCtrl', function ($scope, $rootScope, $state, $ionicActionSheet, $http, $ionicPopup) {
   $scope.buildings = [{
     "id": 1,
     "name": "SSZ"
@@ -102,6 +102,7 @@ angular.module('app.controllers', [])
             aMemberHash[$scope.selected.value[i].id] = 1;
           }
         }
+
       
       
 
@@ -131,6 +132,14 @@ angular.module('app.controllers', [])
           console.log("ERROR");
         });
       
+        }
+        else{
+  //        $ionicPopup.alert({
+  //    title: 'oops!',
+  //    template: 'Meetings already exist in timeframe'
+  //  });
+          alert("Meetings already exist in timeframe.");
+
         }
 
     }, function errorCallback(response) {
