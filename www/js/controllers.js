@@ -39,7 +39,8 @@ angular.module('app.controllers', [])
   $scope.selected = {
     value: ''
   };
-   $scope.buildings = { name: $rootScope.buildings.selectedbuilding };
+  
+   
    $scope.rooms = $rootScope.rooms; 
    $scope.createMeeting = $rootScope.createMeeting;
    
@@ -59,7 +60,7 @@ angular.module('app.controllers', [])
   $scope.createMyMeeting = function () {  
 //  $rootScope.show();
      var sRoom = $scope.rooms.selectedfloor;
-      var sBuilding = $scope.buildings.selectedbuilding;
+      var sBuilding = $scope.createMeeting.selectedbuilding;
       var sSub = $scope.createMeeting.subject;
       var sDescription = $scope.createMeeting.description;
       var fDuration = $scope.createMeeting.duration;
@@ -274,7 +275,9 @@ angular.module('app.controllers', [])
       }];
       $rootScope.buildings = { selectedbuilding: this.item.building_name};
       $rootScope.rooms = { selectedfloor: this.item.desired_room};
-      $rootScope.createMeeting = { subject: this.item.subject };
+      $rootScope.createMeeting = { 
+        selectedbuilding : this.item.building_name,
+        subject: this.item.subject };
 
       $state.go("page.detail");
     };

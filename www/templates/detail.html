@@ -23,14 +23,14 @@
       <div class="list padding">
         <label class="list">Building
         </label>
-        <select class="item item-input-inset"  ng-model="buildings.selectedbuilding" ng-change="onBuildingSelect(buildings.selectedbuilding)">
+        <select class="item item-input-inset"  ng-model="createMeeting.selectedbuilding" ng-change="onBuildingSelect(createMeeting.selectedbuilding)">
            <option ng-repeat="building in buildings" ng-value="building.name">{{ building.name }}</option>
        
         </select>
         <label class="list">Room
         </label>
         <select class="item item-input-inset"  ng-model="rooms.selectedfloor">
-          <option ng-repeat="room in rooms" ng-selected = "rooms.selectedfloor ==  room.floor"    ng-value="room.room">{{ room.floor }}-{{ room.room }}</option>
+          <option ng-repeat="room in rooms" ng-selected=<z></z>"rooms.selectedfloor ==  room.floor"    ng-value="room.room">{{ room.floor }}-{{ room.room }}</option>
         </select>
       </div>
     </div>
