@@ -77,6 +77,11 @@ angular.module('app.controllers', [])
 })
 
 .controller('newMeetingRequestCtrl', function ($scope, $rootScope, $state) {
+
+   $scope.detailNav = function () {
+   
+    $state.go("page.detail");
+  };
 })
 .controller('meetingCtrl', function ($scope, $rootScope, $state) {
 

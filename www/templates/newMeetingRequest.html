@@ -8,8 +8,31 @@
         </h2>
         <hr></hr>
         </div>
-        
+        <br> </br>
+        <br> </br>
+        <br> </br>
+        <br> </br>
+
+         <h3>
+            {{meeting.subject}}WTH Discussion
+        </h3>
+
+         <h5>
+           Time:  {{meeting.time}} | Venue: {{meeting.venue}}
+        </h5>
+        <button class="col col-33 button button-positive" ng-click="detailNav()">Details 
+        </button>
+
+     
     </div>
   </ion-content>
+       <ion-footer-bar class="col">
+        
+         <button class="col col-33 button button-balanced">Accept
+        </button>
+         <button class="col col-33 button button-assertive">Reject
+        </button>
+       
+       </ion-footer-bar>
   
 </ion-view>
