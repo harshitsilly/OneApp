@@ -36,24 +36,24 @@
     </div>
     <div class="list padding">
       <label class="item item-input-inset">
-        <input type="text" placeholder="Subject" ng-model="meeting_subject" >
+        <input type="text" placeholder="Subject" ng-model="createMeeting.subject" >
       </label>
       <label class="item item-input-inset">
         <textarea id = "myTextArea"
                   rows = "3"
                   cols = "80"
-                  placeholder="Description" ng-model="meeting_description"></textarea>
+                  placeholder="Description" ng-model="createMeeting.description"></textarea>
       </label>
     </div>
     <div class="list padding row">
       <label class="item item-input col">
-        <input type="time" name="input" ng-model= "my.startTimeRange"
+        <input type="time" name="input" ng-model= "createMeeting.startTimeRange"
           placeholder="HH:mm:ss" required />
       </label>
       <label class="item item-input col">To
       </label>
       <label class="item item-input col">
-        <input type="time" name="input" ng-model="my.endTimeRange"
+        <input type="time" name="input" ng-model="createMeeting.endTimeRange"
           placeholder="HH:mm:ss" required />
       </label>
     </div>
@@ -62,7 +62,7 @@
         <input type="date">
       </label>
       <label class="item item-input col col-offset-10">
-        <input type="number" placeholder="Duration in hours" ng-model="my.duration">
+        <input type="number" placeholder="Duration in hours" ng-model="createMeeting.duration">
       </label>
     </div>
     <!--Submit Button-->

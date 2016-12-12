@@ -18,7 +18,7 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('detailCtrl', function ($scope, $rootScope, $ionicActionSheet, $http) {
+.controller('detailCtrl', function ($scope, $rootScope, $state, $ionicActionSheet, $http) {
   $scope.buildings = [{
     "id": 1,
     "name": "SSZ"
@@ -28,6 +28,8 @@ angular.module('app.controllers', [])
     "name": "Whitefield"
   }];
   $scope.detailTitle = $rootScope.meetingDetail[0].description;
+  $scope.createMeeting = { subject: '', description: '', startTimeRange: '', endTimeRange: '', duration: ''};
+  $scope.selected = { value: '' };
   $scope.deleteMeeting = function () {
       var hideSheet = $ionicActionSheet.show({
         destructiveText: 'Confirm',
@@ -43,14 +45,22 @@ angular.module('app.controllers', [])
     url: $rootScope.baseURL + '/api/member'
   }).then(function successCallback(response) {
       $scope.memberList = response.data;
+       
     }, function errorCallback(response) {
       console.log("ERROR");
     });
 
-  $scope.selected = { value: $scope.memberList };
+ 
   
-   $scope.createMyMeeting = function() {
+     $scope.createMyMeeting = function() {
      console.log($scope.selected.value+ $scope.buildings.selectedbuilding + $scope.rooms.selectedfloor );
+     var sSub = $scope.createMeeting.subject;
+     var sDescription = $scope.createMeeting.description;
+     var tStartTime = $scope.createMeeting.startTimeRange;
+     var tEndTime = $scope.createMeeting.endTimeRange;
+     var fDuration = $scope.createMeeting.duration;
+     
+      $state.go("newMeeting");
    };
 
    $scope.onBuildingSelect = function(buildings){
@@ -66,6 +76,8 @@ angular.module('app.controllers', [])
 
 })
 
+.controller('newMeetingRequestCtrl', function ($scope, $rootScope, $state) {
+})
 .controller('meetingCtrl', function ($scope, $rootScope, $state) {
 
   $scope.items = [{

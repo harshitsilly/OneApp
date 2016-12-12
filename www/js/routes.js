@@ -28,6 +28,12 @@ angular.module('app.routes', [])
     controller: 'loginCtrl'
   })
 
+ .state('newMeeting', {
+    url: '/MeetingRequest',
+    templateUrl: 'templates/newMeetingRequest.html',
+    controller: 'newMeetingRequestCtrl'
+  })
+
 .state('page.meeting', {
     url: '/meeting',
      views: {
