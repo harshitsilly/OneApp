@@ -10,11 +10,37 @@
     </ion-nav-buttons>
   </ion-nav-bar>
   <ion-content overflow-scroll="true" padding="true" class="has-header">
-    <div class="list padding ng-cloak">
-      <ion-list ng-show="!IsNoMeetingClick">
-      <ion-item ng-repeat="item in createMeeting.members" item="item">
+   
+      <ion-list  ng-show="!IsNoMeetingClick">
+      <div class="item" ng-repeat="item in createMeeting.members">
+        <div class="row">
+        <div class="col col-67">
         <p>{{ item.name }}</p>
-      </ion-item>
+        </div>
+         <div ng-show="{{ item.status == 'YES' ? true : false}}">
+              <label>Accepted</label>
+              <button class="col col-center icon ion-ios-circle-filled button button-balanced button-clear"> 
+              </button>
+            </div>
+            
+          
+            <div ng-show="{{ item.status == '' ? true : false}}">
+              <label>Tentative</label>
+              <button class="col col-center icon ion-ios-circle-filled button button-energized button-clear"> 
+          </button>
+            </div>
+            
+            <div ng-show="{{ item.status == 'NO' ? true : false}}">
+              <label>Declined</label>
+              <button class="col col-center icon ion-ios-circle-filled button button-assertive button-clear"> 
+          </button>
+            </div>
+            <div ng-show="{{ item.status != '' && item.status != 'NO' && item.status != 'YES'? true : false}}">
+              <label>{{item.status}} Away </label>
+          </button>
+            </div>
+        </div>
+      </div>
       </ion-list>
       <ui-select ng-show="IsNoMeetingClick" class="item" multiple ng-model="selected.value" sortable="true" close-on-select="false">
         <ui-select-match placeholder="Select person....">{{$item.name}}
@@ -23,7 +49,7 @@
           <span ng-bind="item.name"></span>
         </ui-select-choices>
       </ui-select>
-    </div>
+    
     <div class="list padding">
       <div class="list padding">
         <label class="list">Building

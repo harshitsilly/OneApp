@@ -75,7 +75,7 @@ angular.module('app.controllers', [])
 
     var tStartTime = $scope.createMeeting.startTimeRange;
     var tEndTime = $scope.createMeeting.endTimeRange;
-    var iCanCreate = 0;
+    //var iCanCreate = 0;
     var meetDate = meetingOn.toLocaleString().split(',');
     tStartTime = tStartTime.toLocaleString().split(',');
     tEndTime = tEndTime.toLocaleString().split(',');
@@ -90,9 +90,48 @@ angular.module('app.controllers', [])
       
     }).then(function successCallback(response) {
       console.log(response);
-      if(response.data == 0){
-        iCanCreate = 1;
-      }
+      if(response.data < 1){
+       
+        var aMembers = [];
+        var aMemberHash = {};
+        aMembers.push("I321584");
+        aMemberHash["I321584"] = 1;
+        for (i = 0; i < $scope.selected.value.length; i++) {
+          if(!aMemberHash[$scope.selected.value[i].id]){
+            aMembers.push($scope.selected.value[i].id);
+            aMemberHash[$scope.selected.value[i].id] = 1;
+          }
+        }
+      
+      
+
+        var oPayload = {
+          "building_name" : sBuilding,
+          "members" : aMembers,
+          "subject" : sSub,
+          "description" : sDescription,
+          "organizer_id" : "I321584",
+          "date" : new Date(),
+          "starttime" : tStartTime,
+          "endtime" : tEndTime,
+          "desired_floor" : sRoom.split('-')[0],
+          "desired_room" : sRoom.split('-')[1] 
+        };
+        $http({
+          method: 'POST',
+          url: $rootScope.baseURL + '/api/meeting',
+          data: oPayload
+        }).then(function successCallback(response) {
+          console.log("SUCCESS");
+          // $rootScope.hide();
+          $state.go('newMeeting');
+          //$state.go('meetingStatus');
+        }, function errorCallback(response) {
+        
+          console.log("ERROR");
+        });
+      
+        }
 
     }, function errorCallback(response) {
       console.log("ERROR");
@@ -100,48 +139,7 @@ angular.module('app.controllers', [])
     });
     
 
-    if(iCanCreate){
-     
-      var aMembers = [];
-      var aMemberHash = {};
-      aMembers.push("I321584");
-       aMemberHash["I321584"] = 1;
-      for (i = 0; i < $scope.selected.value.length; i++) {
-        if(!aMemberHash[$scope.selected.value[i].id]){
-          aMembers.push($scope.selected.value[i].id);
-          aMemberHash[$scope.selected.value[i].id] = 1;
-        }
-      }
-     
-    
-
-      var oPayload = {
-        "building_name" : sBuilding,
-        "members" : aMembers,
-        "subject" : sSub,
-        "description" : sDescription,
-        "organizer_id" : "I321584",
-        "date" : new Date(),
-        "starttime" : tStartTime,
-        "endtime" : tEndTime,
-        "desired_floor" : sRoom.split('-')[0],
-        "desired_room" : sRoom.split('-')[1] 
-      };
-      $http({
-        method: 'POST',
-        url: $rootScope.baseURL + '/api/meeting',
-        data: oPayload
-      }).then(function successCallback(response) {
-        console.log("SUCCESS");
-        // $rootScope.hide();
-         $state.go('newMeeting');
-        //$state.go('meetingStatus');
-      }, function errorCallback(response) {
-       
-        console.log("ERROR");
-      });
-     
-    }
+   
   };
 
   $scope.onBuildingSelect = function (buildings) {

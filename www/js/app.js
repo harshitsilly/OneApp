@@ -38,9 +38,9 @@ angular.module('app', ['ionic', 'app.controllers', 'app.newMeetingRequest', 'app
       }, function errorCallback(response) {
         console.log("ERROR");
       });
-      $timeout(fetchMembers, 20000);
+      $timeout(fetchMembers, 1000);
   }
-  $timeout(fetchMembers, 20000);
+  $timeout(fetchMembers, 1000);
   // var fetchLocation = function () {
   //   var onSuccess = function (position) {
   //     $http({
