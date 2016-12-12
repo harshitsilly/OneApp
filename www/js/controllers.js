@@ -180,10 +180,10 @@ angular.module('app.controllers', [])
 
     $http({
       method: 'GET',
-      url: $rootScope.baseURL + 'meeting?id=' + 'I317828'
+      url: $rootScope.baseURL + '/api/meeting?id=I321530'
     }).then(function successCallback(response) {
           if(response && response.data){
-            $scope.items = response.data;
+            $scope.items = response.data.mymeetings;
           }
         }, function errorCallback(response) {
           console.log("ERROR");
