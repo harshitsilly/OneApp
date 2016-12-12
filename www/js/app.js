@@ -7,18 +7,48 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['ionic', 'app.controllers', 'app.newMeetingRequest', 'app.meetingStatus', 'app.routes', 'app.services', 'app.directives', 'ui.select', 'ngSanitize'])
 
-.run(function($ionicPlatform, $rootScope, $ionicLoading) {
-  $rootScope.baseURL = "http://10.207.113.90:8080";
-  $ionicPlatform.ready(function() {
+.run(function ($ionicPlatform, $rootScope, $ionicLoading, $timeout, $http) {
+  $rootScope.baseURL = window.location.origin;
+  $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
+    if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
-    if(window.StatusBar) {
+    if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-     
+
   });
+
+
+  var fetchLocation = function () {
+    var onSuccess = function (position) {
+      $http({
+        method: 'PUT',
+        url: $rootScope.baseURL + '/api/location',
+        params: {
+          "id": "I321530",
+          "long": position.coords.latitude,
+          "lat": position.coords.longitude
+        }
+      }).then(function successCallback(response) {
+        console.log('Latitude: ' + position.coords.latitude + '\n' +
+          'Longitude: ' + position.coords.longitude + '\n');
+      }, function errorCallback(response) {
+        console.log("ERROR")
+      });
+      
+    };
+
+    function onError(error) {
+      console.log('code: ' + error.code + '\n' +
+        'message: ' + error.message + '\n');
+    }
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    $timeout(fetchLocation, 20000);
+  }
+
+  $timeout(fetchLocation, 20000);
 })

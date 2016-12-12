@@ -5,32 +5,56 @@
     <ion-list>
       <ion-item ng-repeat="item in items" item="item" ng-click="detailNav()">
         <div class="row row-center">
-        <div class="meetingDetail col col-80">
-          <h2>{{ item.subject }}</h2>
-          <h3>{{ item.organizerName.first }} {{ item.organizerName.last }}</h3>
-          <p>{{ item.isRepeating }}</p>
-          <p>Time: {{ item.starttime }} - {{ item.endtime }}</p>
-          <p>Tentative Venue: {{item.building_name}}</p>
-        </div>
-        <div class="col">
-          <button ng-show="chkDecision()" class="col col-top icon ion-checkmark button button-positive button-clear" ng-click="acceptMeeting()">
+          <div class="meetingDetail col col-80">
+            <h2>{{ item.subject }}</h2>
+            <h3>{{ item.organizerName.first }} {{ item.organizerName.last }}</h3>
+            <p>{{ item.isRepeating }}</p>
+            <p>Time: {{ item.starttime }} - {{ item.endtime }}</p>
+            <p>Tentative Venue: {{item.building_name}}</p>
+          </div>
+          <div class="col">
+            <button ng-show="{{ item.status == 'proposed' ? true : false}}" class="col col-top icon ion-checkmark button button-positive button-clear"
+              ng-click="acceptMeeting()">
           </button>
-          <button ng-show="chkDecision()" class="col col-bottom icon ion-close button button-positive button-clear" ng-click="declineMeeting()"> 
+            <button ng-show="{{ item.status == 'proposed' ? true : false}}" class="col col-bottom icon ion-close button button-positive button-clear"
+              ng-click="declineMeeting()"> 
           </button>
-
-           <button ng-show="{{ item.status == 'ACCEPTED' ? true : false}}" class="col col-center icon ion-ios-circle-filled button button-balanced button-clear"> 
+            <div ng-show="{{ item.status == 'ACCEPTED' ? true : false}}">
+              <label>Accepted</label>
+              <button class="col col-center icon ion-ios-circle-filled button button-balanced button-clear"> 
+              </button>
+            </div>
+            <div ng-show="{{ item.status == 'CONFIRMED' ? true : false}}">
+              <label> Confirmed</label>
+              <button class="col col-center icon ion-ios-circle-filled button button-balanced button-clear"> 
+              </button>
+            </div>
+            <div ng-show="{{ item.status == 'PROPOSED' ? true : false}}">
+              <label>Proposed</label>
+              <button class="col col-center icon ion-ios-circle-filled button button-energized button-clear"> 
           </button>
-          <button ng-show="{{ item.status == 'DECLINED' ? true : false}}" class="col col-center icon ion-ios-circle-filled button button-assertive button-clear"> 
+            </div>
+            <div ng-show="{{ item.status == 'TENTATIVE' ? true : false}}">
+              <label>Tentative</label>
+              <button class="col col-center icon ion-ios-circle-filled button button-energized button-clear"> 
           </button>
-          <button ng-show="{{ item.status == 'proposed' ? true : false}}" class="col col-center icon ion-ios-circle-filled button button-energized button-clear"> 
+            </div>
+            <div ng-show="{{ item.status == 'CANCELLED' ? true : false}}">
+              <label>Cancelled</label>
+              <button class="col col-center icon ion-ios-circle-filled button button-dark button-clear"> 
           </button>
-        
-          <button ng-show="{{ item.status == 'CANCELLED' ? true : false}}" class="col col-center icon ion-ios-circle-filled button button-dark button-clear"> 
+            </div>
+            <div ng-show="{{ item.status == 'DECLINED' ? true : false}}">
+              <label>Declined</label>
+              <button class="col col-center icon ion-ios-circle-filled button button-assertive button-clear"> 
           </button>
-           <button ng-show="{{ item.status == 'AWAY' ? true : false}}" class="col col-center button button-clear">15 mins away
+            </div>
+            <div ng-show="{{ item.status == 'AWAY' ? true : false}}">
+              <label>Away</label>
+              <button class="col col-center button button-clear">15 mins away
           </button>
-
-        </div>
+            </div>
+          </div>
         </div>
       </ion-item>
     </ion-list>
