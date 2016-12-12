@@ -169,22 +169,9 @@ angular.module('app.controllers', [])
     alert('code: ' + error.code + '\n' +
       'message: ' + error.message + '\n');
   }
+  $scope.memberList = $rootScope.memberList;
 
-   $http({
-    method: 'GET',
-    url: $rootScope.baseURL + '/api/member'
-  }).then(function successCallback(response) {
-    $scope.memberList = response.data;
-    $rootScope.memberList = response.data;
-    $rootScope.memberHash = {};
-    for(var i = 0; i < response.data.length; ++i){
-        $rootScope.memberHash[response.data[i].id] = response.data[i];
-    }
-    
-  }, function errorCallback(response) {
-    console.log("ERROR");
-  });
-
+   
   navigator.geolocation.getCurrentPosition(onSuccess, onError);
   
     $scope.items = [{

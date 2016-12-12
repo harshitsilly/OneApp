@@ -23,6 +23,24 @@ angular.module('app', ['ionic', 'app.controllers', 'app.newMeetingRequest', 'app
   });
 
 
+  var fetchMembers = function(){
+      $http({
+        method: 'GET',
+        url: $rootScope.baseURL + '/api/member'
+      }).then(function successCallback(response) {
+       
+        $rootScope.memberList = response.data;
+        $rootScope.memberHash = {};
+        for(var i = 0; i < response.data.length; ++i){
+            $rootScope.memberHash[response.data[i].id] = response.data[i];
+        }
+        
+      }, function errorCallback(response) {
+        console.log("ERROR");
+      });
+      $timeout(fetchMembers, 20000);
+  }
+  $timeout(fetchMembers, 20000);
   // var fetchLocation = function () {
   //   var onSuccess = function (position) {
   //     $http({
