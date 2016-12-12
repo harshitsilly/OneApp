@@ -122,8 +122,9 @@ angular.module('app.controllers', [])
 })
 
 
-  .controller('meetingCtrl', function ($scope, $rootScope, $state) {
+  .controller('meetingCtrl', function ($scope, $rootScope, $state, $http) {
 
+   
     $scope.items = [{
       "description": "Deserunt cupidatat officia.",
       "organizerName": {
@@ -170,7 +171,25 @@ angular.module('app.controllers', [])
       "status": "ACCEPTED",
       "isRepeating": true
     }];
+
+
+
+
+
     $scope.decision = true;
+
+    $http({
+      method: 'GET',
+      url: $rootScope.baseURL + 'meeting?id=' + 'I317828'
+    }).then(function successCallback(response) {
+          if(response && response.data){
+            $scope.items = response.data;
+          }
+        }, function errorCallback(response) {
+          console.log("ERROR");
+        });
+    
+
     $scope.chkDecision = function () {
       if (this.item.status === "TO BE DECIDED") {
         return true;

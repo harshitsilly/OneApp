@@ -8,7 +8,7 @@
 angular.module('app', ['ionic', 'app.controllers', 'app.newMeetingRequest', 'app.meetingStatus', 'app.routes', 'app.services', 'app.directives', 'ui.select', 'ngSanitize'])
 
 .run(function($ionicPlatform, $rootScope) {
-  $rootScope.baseURL = "http://10.206.137.24:8090"
+  $rootScope.baseURL = "http://10.207.113.90:8080";
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
