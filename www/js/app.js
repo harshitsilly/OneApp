@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services', 'app.directives', 'ui.select', 'ngSanitize'])
+angular.module('app', ['ionic', 'app.controllers', 'app.newMeetingRequest', 'app.routes', 'app.services', 'app.directives', 'ui.select', 'ngSanitize'])
 
 .run(function($ionicPlatform, $rootScope) {
   $rootScope.baseURL = "http://10.206.137.24:8090"
