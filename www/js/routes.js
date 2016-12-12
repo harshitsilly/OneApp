@@ -34,6 +34,12 @@ angular.module('app.routes', [])
     controller: 'newMeetingRequestCtrl'
   })
 
+  .state('meetingStatus', {
+    url: '/MeetingStatus',
+    templateUrl: 'templates/meetingStatus.html',
+    controller: 'meetingStatusCtrl'
+  })
+
 .state('page.meeting', {
     url: '/meeting',
      views: {

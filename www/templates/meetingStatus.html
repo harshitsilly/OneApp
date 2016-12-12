@@ -1,0 +1,32 @@
+
+<ion-view ng-controller="meetingStatusCtrl">
+  
+  <ion-content overflow-scroll="true" class="has-header">
+    <div class="content has-header padding">
+        <div class="list">
+        <h2 class="row row-center">
+            Meeting {{meeting.status}}
+        </h2>
+        <hr></hr>
+        </div>
+        <br> </br>
+        <br> </br>
+        <br> </br>
+        <br> </br>
+
+         <h3>
+            {{meeting.subject}}WTH Discussion
+        </h3>
+
+         <h5>
+           Time:  {{meeting.time}} | Venue: {{meeting.venue}}
+        </h5>
+        <button class="col col-33 button button-positive" ng-click="detailNav()">Details 
+        </button>
+
+     
+    </div>
+  </ion-content>
+     
+  
+</ion-view>

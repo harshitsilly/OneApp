@@ -104,7 +104,8 @@ angular.module('app.controllers', [])
     }, function errorCallback(response) {
       console.log("ERROR");
     });
-    $state.go('page.meeting');
+    $state.go('newMeeting');
+    //$state.go('meetingStatus');
   };
 
   $scope.onBuildingSelect = function (buildings) {
@@ -120,7 +121,7 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('newMeetingRequestCtrl', function ($scope, $rootScope, $state) {})
+
   .controller('meetingCtrl', function ($scope, $rootScope, $state) {
 
     $scope.items = [{
