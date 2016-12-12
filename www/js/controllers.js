@@ -50,7 +50,7 @@ angular.module('app.controllers', [])
   $scope.selected = { value: $scope.memberList };
   
    $scope.createMyMeeting = function() {
-     console.log($scope.selected.value+ $scope.building.name + $scope.building_room );
+     console.log($scope.selected.value+ $scope.buildings.selectedbuilding + $scope.rooms.selectedfloor );
    };
 
    $scope.onBuildingSelect = function(buildings){
